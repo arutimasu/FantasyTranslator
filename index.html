@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Fantasy Translator</title>
+</head>
+
+<body>
+<style>
+textarea {
+	 font: 16px Consolas
+}
+@font-face {
+font-family: "RalewayRegular"; 
+src: url("Myshkin.ttf") format("truetype"); 
+/*font-style: normal; 
+font-weight: normal;*/ 
+} 
+</style>
+<textarea></textarea>
+<script>
+var str = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+var ta = document.getElementsByTagName("textarea")[0];
+function setKeywordText(text) {
+    var el = ta;
+    el.value += text;
+    var evt = document.createEvent("Events");
+    evt.initEvent("change", true, true);
+    el.dispatchEvent(evt);
+}
+
+//setKeywordText("test");
+function buttonClickHandler(){
+ setKeywordText(this.value);
+  //ta.innerHTML += this.value;
+  //var evt = document.createEvent("Events");
+  //evt.initEvent("change", true, true);
+  //ta.dispatchEvent(evt);
+  //console.log(document.getElementsByTagName("textarea").innerHTML);
+  //console.log(this.value);
+};
+function enableUpdateButton() {
+	for(var i=0; i < str.length; i++){
+    document.getElementsByTagName("button")[i].disabled = false;
+    console.log( document.getElementsByTagName("button")[i].disabled);
+}
+
+} 
+function createKeyboard()
+{
+   
+
+   for(var i=0; i<str.length; i++)
+   {
+   	if(i % 7 == 0){
+   		document.body.appendChild(document.createElement("BR"));
+   	}
+    var nextChar = str.charAt(i);
+    var btn = document.createElement("BUTTON");
+    btn.id = 'btn' + nextChar;
+    btn.innerHTML = nextChar;
+    btn.setAttribute("value", nextChar);
+    btn.setAttribute("text",nextChar);
+    btn.style.fontSize = "25px";
+    //btn.style.fontSize = "51px";
+    //btn.style.backgroundColor = '#4CAF50';
+    btn.style.fontFamily = "RalewayRegular";
+    btn.addEventListener('click', buttonClickHandler);
+    document.body.appendChild(btn);
+    }
+
+};
+createKeyboard();
+//ta.onchange=enableUpdateButton();
+</script>
+</body>
+</html>
